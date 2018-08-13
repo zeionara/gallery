@@ -49,36 +49,35 @@ html, body {
 	margin-top: 10px;
 }
 
-.movie-container {
+.art-item-container {
 	float: left;
-	width: 200px;
 	margin-left: 20px;
 	font-weight: 600;
 	font-size: 10px;
 }
 
-.album-container {
-	float: left;
+.thin-container {
+	width: 200px;
+}
+
+.thick-container {
 	width: 300px;
-	margin-left: 20px;
-	font-weight: 600;
-	font-size: 10px;
 }
 
 .poster {
-	width: 200px;
-	height: 350px;
-	background-color:red;
-	background-size:cover;
-       	background-position:center;	
-}
-
-.album-poster {
-	width:300px;
-	height:300px;
 	background-color: #fff;
 	background-size: cover;
 	background-position: center;
+}
+
+.rectangled-poster {
+	width: 200px;
+	height: 350px;	
+}
+
+.squared-poster {
+	width:300px;
+	height:300px;
 }
 
 .thin-text {
@@ -96,13 +95,14 @@ html, body {
 .rating {
 	width: 100px;
 	height: 100px;
-	margin-left: 50px;
 	background-size: cover;
 }
 
-.album-rating {
-	width: 100px;
-	height: 100px;
-	margin-left: 100px;
-	background-size: cover;
+.normal-rating {
+	margin-left: 50px;
 }
+
+.double-margin-rating {
+	margin-left: 100px;
+}
+

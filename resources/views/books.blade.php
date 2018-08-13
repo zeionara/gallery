@@ -3,15 +3,29 @@
 $title='Books';
 
 $current_page_variable_name='current_page_'.$title;
-$page_capacity = Config::get('constants.page_capacity');
+
+
+if (isset($_GET['width'])){
+	session(['page_size' => floor($_GET['width'] / 200)]);
+
+}
+
+$page_size = session('page_size', -10);
+if ($page_size < 0){
+	$page_capacity = Config::get('constants.page_capacity_thin');
+} else {
+	$page_capacity = floor($page_size / 1.5);
+}
+
+
 
 if (isset($_GET['page'])){
 	${$current_page_variable_name} = $_GET['page'];
 	session([$current_page_variable_name => ${$current_page_variable_name}]);
 }	
 
-if (${$current_page_variable_name} > ceil(count($books) / $page_capacity)){
-	${$current_page_variable_name} = ceil(count($books) / $page_capacity);
+if (${$current_page_variable_name} > ceil(count($items) / $page_capacity)){
+	${$current_page_variable_name} = ceil(count($items) / $page_capacity);
 }
 
 ?>
@@ -54,22 +68,22 @@ if (${$current_page_variable_name} > ceil(count($books) / $page_capacity)){
 		</div>
 
 		<div>
-		    @foreach ($books as $key => $book)
+		    @foreach ($items as $key => $item)
 			@if (($key < ${$current_page_variable_name} * $page_capacity) and 
 			     ($key >= (${$current_page_variable_name} - 1) * $page_capacity))
-			    <div class='movie-container'>
-				<div class='poster' style='background-image:url("{{$book->poster}}")'></div>
-				<div class='rating' title='{{$book->rating}}/10' style='background-image:url("/ratings/{{$book->rating}}.jpg");'></div>
+			    <div class='art-item-container thin-container'>
+				<div class='poster rectangled-poster' style='background-image:url("{{$item->poster}}")'></div>
+				<div class='rating normal-rating' title='{{$item->rating}}/10' style='background-image:url("/ratings/{{$item->rating}}.jpg");'></div>
 			    </div>
 			@endif
 		    @endforeach
 
 		    <div class='thin-text' style="width:100%; display:block; float:right;">
-		        @if (ceil(count($books) / $page_capacity) > ${$current_page_variable_name})
-		            <a href='/books?page={{${$current_page_variable_name} + 1}}'>next</a>
-		        @endif
 		        @if (${$current_page_variable_name} > 1)
 		            <a href='/books?page={{${$current_page_variable_name} - 1}}'>prev</a>
+			@endif
+		        @if (ceil(count($items) / $page_capacity) > ${$current_page_variable_name})
+		            <a href='/books?page={{${$current_page_variable_name} + 1}}'>next</a>
 		        @endif
 		    </div>
 

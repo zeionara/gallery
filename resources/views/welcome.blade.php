@@ -73,7 +73,18 @@
 		text-decoration: none;
 		font-weight: 600;
 	    }
-        </style>
+	</style>
+
+	<script>
+		window.onload = function() {
+			console.log(window.innerWidth);
+			redirects = document.getElementsByClassName("redirect");
+			for(var i = 0; i < redirects.length; i++)
+			{
+	   			redirects.item(i).setAttribute('href', redirects.item(i).getAttribute('href') + '?width=' + window.innerWidth);
+   			}	   			//document.getElementById("tesst").setAttribute('href', '/movies?width=' + screen.width);
+       		} 
+        </script>	
     </head>
     <body>
         <div class="flex-center position-ref full-height">
@@ -94,9 +105,9 @@
                 </div>
 
                 <div class="links">
-                    <a href="/movies">Movies</a>
-                    <a href="/books">Books</a>
-                    <a href="/music">Music</a>
+                    <a class='redirect' href="/movies">Movies</a>
+                    <a class='redirect' href="/books">Books</a>
+                    <a class='redirect' href="/music">Music</a>
 		</div>
 
 		<div class="thin-text">
