@@ -1,0 +1,108 @@
+html, body {
+	background-color: #fff;
+	color: #636b6f;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 100;
+	height: 100%;
+	margin: 0;
+}
+
+.full-height {
+	height: 100%;
+}
+
+.flex-center {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+.position-ref {
+	position: relative;
+}
+
+.top-right {
+	position: absolute;
+	right: 10px;
+	top: 18px;
+}
+
+.content {
+	text-align: center;
+}
+
+.title {
+	font-size: 84px;
+}
+
+.links > a {
+	color: #636b6f;
+	padding: 0 25px;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: .1rem;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.up-text {
+	margin-top: 10px;
+}
+
+.movie-container {
+	float: left;
+	width: 200px;
+	margin-left: 20px;
+	font-weight: 600;
+	font-size: 10px;
+}
+
+.album-container {
+	float: left;
+	width: 300px;
+	margin-left: 20px;
+	font-weight: 600;
+	font-size: 10px;
+}
+
+.poster {
+	width: 200px;
+	height: 350px;
+	background-color:red;
+	background-size:cover;
+       	background-position:center;	
+}
+
+.album-poster {
+	width:300px;
+	height:300px;
+	background-color: #fff;
+	background-size: cover;
+	background-position: center;
+}
+
+.thin-text {
+	font-size: 16px;
+	margin-top: 30px;
+	margin-bottom: 30px;	
+}
+
+.thin-text > a {
+	color: #939b9f;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.rating {
+	width: 100px;
+	height: 100px;
+	margin-left: 50px;
+	background-size: cover;
+}
+
+.album-rating {
+	width: 100px;
+	height: 100px;
+	margin-left: 100px;
+	background-size: cover;
+}

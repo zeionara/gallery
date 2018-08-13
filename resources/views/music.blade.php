@@ -1,87 +1,80 @@
 <!doctype html>
+<?php 
+$title='Music';
+
+$current_page_variable_name='current_page_'.$title;
+$page_capacity = Config::get('constants.page_capacity');
+
+if (isset($_GET['page'])){
+	${$current_page_variable_name} = $_GET['page'];
+	session([$current_page_variable_name => ${$current_page_variable_name}]);
+}	
+
+if (${$current_page_variable_name} > ceil(count($music) / $page_capacity)){
+	${$current_page_variable_name} = ceil(count($music) / $page_capacity);
+}
+
+?>
 <html lang="{{ app()->getLocale() }}">
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Music</title>
+	<title>{{$title}}</title>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+	<!-- Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+	<!-- Styles -->
+	<link rel="stylesheet" type="text/css" href={{asset('css/general.css')}}>
 
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .up-text {
-                margin-top: 10px;
-            }
-        </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
+	<div class="flex-center position-ref full-height">
 
-            <div class="content">
-                <div class="title up-text">
-                    Music
-                </div>
-            </div>
-        </div>
+	   @if (Route::has('login'))
+		<div class="top-right links">
+		    @auth
+			<a href="{{ url('/home') }}">Home</a>
+		    @else
+			<a href="{{ route('login') }}">Login</a>
+			<a href="{{ route('register') }}">Register</a>
+		    @endauth
+		</div>
+	    @endif
+
+	    <div class="content">
+		<div class="title up-text">
+		    {{$title}}
+		</div>
+
+		<div class='thin-text'>
+		    <a href='/'>back</a>
+		</div>
+
+		<div>
+		    @foreach ($music as $key => $album)
+			@if (($key < ${$current_page_variable_name} * $page_capacity) and 
+			     ($key >= (${$current_page_variable_name} - 1) * $page_capacity))
+			    <div class='album-container'>
+				<div class='album-poster' style='background-image:url("{{$album->poster}}")'></div>
+				<div class='album-rating' title='{{$album->rating}}/10' style='background-image:url("/ratings/{{$album->rating}}.jpg");'></div>
+			    </div>
+			@endif
+		    @endforeach
+
+		    <div class='thin-text' style="width:100%; display:block; float:right;">
+		        @if (ceil(count($music) / $page_capacity) > ${$current_page_variable_name})
+		            <a href='/music?page={{${$current_page_variable_name} + 1}}'>next</a>
+		        @endif
+		        @if (${$current_page_variable_name} > 1)
+		            <a href='/music?page={{${$current_page_variable_name} - 1}}'>prev</a>
+		        @endif
+		    </div>
+
+	        </div>
+	    </div>
+	</div>
     </body>
 </html>

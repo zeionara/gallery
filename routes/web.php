@@ -15,25 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/movies', 'MovieController@get'); /*function() {
-    Class Movie {
-    	public $title;
-	public $rating;
-    }
+Route::get('/movies', 'MovieController@get');
 
-    $raw = new Movie();
-    $raw->title = 'Raw';
-    $raw->rating = 9;
+Route::get('/books', 'BookController@get');
 
-    $movies = /*Movie:all();//array($raw);
-
-    return view('movies', ['movies' => $movies]);
-});*/
-
-Route::get('/books', function() {
-    return view('books');
-});
-
-Route::get('/music', function() {
-    return view('music');
-});
+Route::get('/music', 'MusicController@get');
