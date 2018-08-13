@@ -1,4 +1,7 @@
 <!doctype html>
+<?php
+$marks = array(3,4,5,6,7,8,9,10);
+?>
 <html lang="{{ app()->getLocale() }}">
     <head>
         <meta charset="utf-8">
@@ -10,7 +13,8 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
-        <!-- Styles -->
+	<!-- Styles -->
+	<link rel='stylesheet' type='text/css' href='css/general.css'/>
         <style>
             html, body {
                 background-color: #fff;
@@ -108,6 +112,13 @@
                     <a class='redirect' href="/movies">Movies</a>
                     <a class='redirect' href="/books">Books</a>
                     <a class='redirect' href="/music">Music</a>
+		</div>
+
+		<div class="ratings-description">
+			@foreach ($marks as $mark)
+			<div class="rating" style='float:left; background-image:url("/ratings/{{$mark}}.jpg");' title='{{$mark}}/10'>
+			</div>
+			@endforeach
 		</div>
 
 		<div class="thin-text">
